@@ -1,0 +1,6 @@
+[submodule "LNP"]
+	path = LNP
+	url = git@github.com:broadinstitute/getzlab-LNP.git
+[submodule "funcs"]
+	path = funcs
+	url = git@github.com:broadinstitute/getzlab-LNPHS_utils.git
