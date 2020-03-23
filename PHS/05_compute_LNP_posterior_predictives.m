@@ -210,52 +210,52 @@ print('figures/apo_scatter.svg', '-dsvg', '-painters')
 
 % and, while we're at it, check AHR
 
-for x = [ui [ui(2:end) - 1; slength(F)] (1:length(ui))']',
-  i = x(1); j = x(2); k = x(3);
-
-  X1 = load(F.file{i});
-  X2 = load(F.file{j}); %with hairpin
-
-%   %how many sites are affected by missing hairpin covariates, and what are their counts?
-%   count(X2.M(X2.C(:, 5) == 0))
-
-  gidx = strcmp(X1.Mu.gene, 'AHR');
-  if ~any(gidx), continue; end
-
-  idx = find(X1.M > 0);
-
-  pidx = idx(gidx);
-
-  for pp = pidx',
-    fprintf('%d: %0.2f %0.2f %0.2f %0.2f %0.2f   %d\n', k, X2.C(pp, 1:5), X2.M(pp, :))
-  end
-end
-
-C = load('ref/cod_APOBEC.lawrence.hairpin_covars.align75_filtered/v1/chr10.mat')
-
-C.covu(C.covar_mat(96162370, :)) %-Inf -> not in covariate track
+% for x = [ui [ui(2:end) - 1; slength(F)] (1:length(ui))']',
+%   i = x(1); j = x(2); k = x(3);
+% 
+%   X1 = load(F.file{i});
+%   X2 = load(F.file{j}); %with hairpin
+% 
+% %   %how many sites are affected by missing hairpin covariates, and what are their counts?
+% %   count(X2.M(X2.C(:, 5) == 0))
+% 
+%   gidx = strcmp(X1.Mu.gene, 'AHR');
+%   if ~any(gidx), continue; end
+% 
+%   idx = find(X1.M > 0);
+% 
+%   pidx = idx(gidx);
+% 
+%   for pp = pidx',
+%     fprintf('%d: %0.2f %0.2f %0.2f %0.2f %0.2f   %d\n', k, X2.C(pp, 1:5), X2.M(pp, :))
+%   end
+% end
+% 
+% C = load('ref/cod_APOBEC.lawrence.hairpin_covars.align75_filtered/v1/chr10.mat')
+% 
+% C.covu(C.covar_mat(96162370, :)) %-Inf -> not in covariate track
 
 %
 % where is C3orf70? it doesn't appear in the APOBEC subcohort {{{
 
-M = loadM('mutation_data/MC3.align75.ICE_PoN_sig_annots.M');
-
-signames = {'CpG' 'APOBEC' 'BRCA' 'smoking' 'ERCC2' 'MSI' 'UV' '8' 'AID/POLeta' 'POLE' 'alkylating' 'liver' 'APOBEC' '14' 'MSI' 'liver' 'eso' 'NB' 'PA' 'MSI' 'MSI' 'AA' '23' 'aflatoxin' 'hodgkin' 'MSI' 'KIRC' 'eso' '29' '30'};
-
-c3idx = M.mut.chr == 3 & M.mut.pos == 184870595 & M.mut.ch96 == 95;
-
-figure(6); clf
-imagesc(M.mut.sigmat(c3idx, :));
-ax = gca;
-ax.XTick = 1:30;
-ax.XTickLabel = signames;
-ax.XTickLabelRotation = 90;
-ax.CLim = [0 1];
-
-ax.Title.String = 'C3orf70 S6L signature assignments';
-
-cb = colorbar;
-cb.YLabel.String = 'Signature assignment probability';
+% M = loadM('mutation_data/MC3.align75.ICE_PoN_sig_annots.M');
+% 
+% signames = {'CpG' 'APOBEC' 'BRCA' 'smoking' 'ERCC2' 'MSI' 'UV' '8' 'AID/POLeta' 'POLE' 'alkylating' 'liver' 'APOBEC' '14' 'MSI' 'liver' 'eso' 'NB' 'PA' 'MSI' 'MSI' 'AA' '23' 'aflatoxin' 'hodgkin' 'MSI' 'KIRC' 'eso' '29' '30'};
+% 
+% c3idx = M.mut.chr == 3 & M.mut.pos == 184870595 & M.mut.ch96 == 95;
+% 
+% figure(6); clf
+% imagesc(M.mut.sigmat(c3idx, :));
+% ax = gca;
+% ax.XTick = 1:30;
+% ax.XTickLabel = signames;
+% ax.XTickLabelRotation = 90;
+% ax.CLim = [0 1];
+% 
+% ax.Title.String = 'C3orf70 S6L signature assignments';
+% 
+% cb = colorbar;
+% cb.YLabel.String = 'Signature assignment probability';
 
 % it doesn't appear because it's not assigned with probability >75% to APOBEC!
 
