@@ -11,8 +11,12 @@ This repository contains:
 
 ### What's *not* in this repo?
 
-* Any reference data used by these analyses, which totals approximately 19 GB. We are currently working out the logistics to best host this, and anticipate having these data available by the end of the week of 4 October 2019.
-  * For this reason, code to reproduce gene-related figures (Figure 4, Figure S3, and Table S2) is not yet included.
+* Any reference data used by these analyses, which totals approximately 19 GB.  These data are hosted in a Google storage bucket (`gs://getzlab-passengerhotspots`); to download this, please [install gsutil](https://cloud.google.com/storage/docs/gsutil_install) and run (in the root directory of this repo):
+
+```
+gsutil -m cp -r gs://getzlab-passengerhotspots/* ref
+```
+
 * Any dbGaP protected data, which will have to be obtained by individuals with appropriate authorization.
 
 All external reference data are assumed by the code to reside in the `ref/` directory, and external mutation data in the `mutation_data/` directory. Protected data, when present, is clearly denoted in the code.
